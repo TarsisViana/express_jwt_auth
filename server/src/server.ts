@@ -1,15 +1,12 @@
 import express from "express";
 const server = express();
 
-import { PrismaClient } from "@prisma/client";
-const prisma = new PrismaClient();
-
 import "dotenv/config";
-import passport from "passport";
 import "./auth/passport.js";
 import cors from "cors";
 
-import routes from "./routes/index.js";
+import routes from "./routes/index";
+import config from "./config/config";
 
 //---- MIDDLEWARE FUNCTIONS ----
 server.use(express.json());
@@ -25,5 +22,5 @@ server.use("/protected", routes.protectedRouter);
 
 //---- SERVER ----
 server.listen(process.env.SERVER_PORT, () => {
-  console.log("server online on: " + process.env.SERVER_PORT);
+  console.log(`Server online on ${config.port}`);
 });
